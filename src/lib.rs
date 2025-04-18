@@ -8,7 +8,7 @@
 /// Requires the [`automod`](https://docs.rs/automod) crate.
 #[macro_export]
 macro_rules! bundle {
-    ($path:path) => {
+    ($path:expr) => {
         automod::dir!($path);
     };
 }
