@@ -83,3 +83,10 @@ macro_rules! package {
         )*
     };
 }
+
+#[macro_export]
+macro_rules! extend {
+    () => {
+        pub use super::*;   
+    };
+}
