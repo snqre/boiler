@@ -29,7 +29,7 @@ macro_rules! bundle {
 ///
 /// # Example
 /// ```rust
-/// public!(models, utils);
+/// expose!(models, utils);
 /// ```
 ///
 /// This expands to:
@@ -38,7 +38,7 @@ macro_rules! bundle {
 /// pub use utils::*;
 /// ```
 #[macro_export]
-macro_rules! public {
+macro_rules! expose {
     ( $( $module:ident ),* $(,)? ) => {
         $( 
             #[allow(unused_imports)]
@@ -84,6 +84,21 @@ macro_rules! package {
     };
 }
 
+/// Marks a module as an extension of its parent by importing all parent items.
+/// 
+/// This macro expands to `use super::*;`, bringing all public items from the parent
+/// module into the current scope. It is functionally equivalent to writing that line
+/// manually, but serves as a **semantic indicator** that the current module is meant
+/// to build upon or extend its parent.
+/// 
+/// # Purpose
+/// Use `extend!` when you want to clearly signal intent — that this module
+/// relies on or enhances the parent — rather than just importing for utility.
+/// It's especially helpful in larger codebases where clarity and structure matter.
+///
+/// # Note
+/// This macro does not perform any re-exports. It is purely a semantic helper
+/// for organizing and understanding module relationships.
 #[macro_export]
 macro_rules! extend {
     () => {
